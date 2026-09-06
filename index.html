@@ -13,20 +13,23 @@
             font-family: 'Vazirmatn', Tahoma, sans-serif; 
             overflow: hidden; 
             background: #000;
+            -webkit-tap-highlight-color: transparent;
         }
         #panorama { width: 100vw; height: 100vh; }
         
-        /* ===== دکمه‌های نئونی ===== */
+        /* ===== دکمه‌های نئونی با نام ثابت ===== */
         .neon-hotspot {
             position: relative;
-            min-width: 110px;
-            padding: 12px 20px;
-            background: rgba(10, 30, 60, 0.75);
+            width: auto !important;
+            height: auto !important;
+            min-width: 100px;
+            padding: 10px 18px;
+            background: rgba(10, 30, 60, 0.8);
             border: 2px solid #4fc3f7;
-            border-radius: 30px;
+            border-radius: 25px;
             color: #fff;
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             text-align: center;
             cursor: pointer;
@@ -37,7 +40,7 @@
                 inset 0 0 10px rgba(79, 195, 247, 0.2);
             text-shadow: 0 0 8px rgba(79, 195, 247, 0.8);
             animation: neonPulse 2.5s ease-in-out infinite;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -45,14 +48,15 @@
             white-space: nowrap;
         }
         
-        .neon-hotspot:hover,
-        .neon-hotspot:active {
-            background: rgba(79, 195, 247, 0.3);
+        /* افکت کلیک/تاچ */
+        .neon-hotspot:active,
+        .neon-hotspot.touch-active {
+            transform: scale(0.92);
+            background: rgba(79, 195, 247, 0.4);
             box-shadow: 
-                0 0 15px rgba(79, 195, 247, 0.9),
-                0 0 35px rgba(79, 195, 247, 0.5),
-                inset 0 0 15px rgba(79, 195, 247, 0.4);
-            transform: scale(1.08);
+                0 0 20px rgba(79, 195, 247, 1),
+                0 0 40px rgba(79, 195, 247, 0.6),
+                inset 0 0 20px rgba(79, 195, 247, 0.5);
         }
         
         @keyframes neonPulse {
@@ -61,21 +65,19 @@
                     0 0 6px rgba(79, 195, 247, 0.5),
                     0 0 15px rgba(79, 195, 247, 0.25),
                     inset 0 0 8px rgba(79, 195, 247, 0.15);
-                text-shadow: 0 0 6px rgba(79, 195, 247, 0.6);
             }
             50% {
                 box-shadow: 
                     0 0 10px rgba(79, 195, 247, 0.7),
                     0 0 25px rgba(79, 195, 247, 0.35),
                     inset 0 0 12px rgba(79, 195, 247, 0.25);
-                text-shadow: 0 0 10px rgba(79, 195, 247, 0.9);
             }
         }
         
-        /* دکمه مشاوره - سبز نئونی */
+        /* دکمه مشاوره سبز */
         .neon-hotspot.consult {
             border-color: #66bb6a;
-            background: rgba(10, 50, 30, 0.75);
+            background: rgba(10, 50, 30, 0.8);
             box-shadow: 
                 0 0 8px rgba(102, 187, 106, 0.6),
                 0 0 20px rgba(102, 187, 106, 0.3),
@@ -84,13 +86,13 @@
             animation: neonPulseGreen 2s ease-in-out infinite;
         }
         
-        .neon-hotspot.consult:hover,
-        .neon-hotspot.consult:active {
-            background: rgba(102, 187, 106, 0.3);
+        .neon-hotspot.consult:active,
+        .neon-hotspot.consult.touch-active {
+            background: rgba(102, 187, 106, 0.4);
             box-shadow: 
-                0 0 15px rgba(102, 187, 106, 0.9),
-                0 0 35px rgba(102, 187, 106, 0.5),
-                inset 0 0 15px rgba(102, 187, 106, 0.4);
+                0 0 20px rgba(102, 187, 106, 1),
+                0 0 40px rgba(102, 187, 106, 0.6),
+                inset 0 0 20px rgba(102, 187, 106, 0.5);
         }
         
         @keyframes neonPulseGreen {
@@ -108,16 +110,36 @@
             }
         }
         
-        /* آیکون داخل دکمه */
-        .neon-hotspot .icon {
-            font-size: 16px;
-            filter: drop-shadow(0 0 4px currentColor);
+        /* نمایش دائمی tooltip (نام دکمه) */
+        .pnlm-hotspot.pnlm-info .pnlm-tooltip,
+        .pnlm-hotspot.pnlm-scene .pnlm-tooltip {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: none;
         }
         
-        /* مخفی کردن تولتیپ پیش‌فرض Pannellum */
-        .pnlm-tooltip { display: none !important; }
+        .pnlm-tooltip span {
+            background: rgba(10, 30, 60, 0.85) !important;
+            color: white !important;
+            padding: 8px 16px !important;
+            border-radius: 20px !important;
+            font-family: 'Vazirmatn', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            direction: rtl;
+            border: 2px solid #4fc3f7 !important;
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.5) !important;
+            text-shadow: 0 0 6px rgba(79, 195, 247, 0.8);
+            white-space: nowrap;
+        }
         
-        /* ===== دکمه‌های ثابت ===== */
+        .pnlm-hotspot.pnlm-info.consult .pnlm-tooltip span {
+            border-color: #66bb6a !important;
+            box-shadow: 0 0 15px rgba(102, 187, 106, 0.5) !important;
+            text-shadow: 0 0 6px rgba(102, 187, 106, 0.8);
+        }
+        
+        /* دکمه‌های ثابت */
         .fixed-btn {
             position: fixed;
             z-index: 9999;
@@ -186,7 +208,6 @@
             backdrop-filter: blur(8px);
         }
         
-        /* لودینگ */
         .loading {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -209,7 +230,6 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* ترنزیشن */
         .transition-overlay {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -217,7 +237,7 @@
             opacity: 0;
             pointer-events: none;
             z-index: 9998;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
         }
         .transition-overlay.active {
             opacity: 1;
@@ -237,7 +257,7 @@
 <a href="https://dibaads.com/" target="_blank" class="fixed-btn scene-title">🦷 ایمپلنتکده</a>
 
 <button class="fixed-btn gps-btn" id="gpsBtn">
-    <span></span>
+    <span>📍</span>
     <span>میدان ملت</span>
 </button>
 
@@ -258,31 +278,32 @@ let soundEnabled = true;
 let audioStarted = false;
 let isTransitioning = false;
 
-// ===== مختصات GPS =====
 const GPS_LAT = 35.5689;
 const GPS_LNG = 51.3456;
 
+// ===== افکت Whoosh =====
 function playWhoosh() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const duration = 0.8;
+        const duration = 0.7;
         const buffer = ctx.createBuffer(2, ctx.sampleRate * duration, ctx.sampleRate);
         for (let ch = 0; ch < 2; ch++) {
             const data = buffer.getChannelData(ch);
             for (let i = 0; i < buffer.length; i++) {
                 const t = i / buffer.length;
-                data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2) * 0.7;
+                data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.5) * 0.8;
             }
         }
         const source = ctx.createBufferSource();
         source.buffer = buffer;
         const filter = ctx.createBiquadFilter();
         filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(4000, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + duration);
+        filter.Q.value = 1.5;
+        filter.frequency.setValueAtTime(5000, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(150, ctx.currentTime + duration);
         const gain = ctx.createGain();
         gain.gain.setValueAtTime(0, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
+        gain.gain.linearRampToValueAtTime(0.7, ctx.currentTime + 0.08);
         gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
         source.connect(filter).connect(gain).connect(ctx.destination);
         source.start();
@@ -330,6 +351,7 @@ function openLandingPage() {
     window.open('https://dibaads.com/cooperation/#contact', '_blank');
 }
 
+// ===== ترنزیشن سینماتیک با زوم این =====
 function cinematicTransition(targetSceneId) {
     if (isTransitioning) return;
     isTransitioning = true;
@@ -338,24 +360,29 @@ function cinematicTransition(targetSceneId) {
     
     const overlay = document.getElementById('transitionOverlay');
     
-    viewer.setZoom(120);
+    // زوم این سریع
+    viewer.setZoom(100);
     
+    // فید به سیاه
     setTimeout(() => {
         overlay.classList.add('active');
-    }, 300);
+    }, 250);
     
+    // تغییر صحنه
     setTimeout(() => {
         viewer.loadScene(targetSceneId);
-    }, 800);
+    }, 700);
     
+    // فید از سیاه
     setTimeout(() => {
         overlay.classList.remove('active');
-    }, 1200);
+    }, 1100);
     
+    // زوم اوت نرم
     setTimeout(() => {
         viewer.setZoom(50);
         isTransitioning = false;
-    }, 1500);
+    }, 1400);
 }
 
 // ===== تعریف صحنه‌ها =====
@@ -369,14 +396,14 @@ const scenes = {
                 "pitch": -5, "yaw": 0,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🚪</span> ایمپلنتکده',
+                "text": "🚪 ایمپلنتکده",
                 "clickHandlerFunc": function() { cinematicTransition('voroodi'); }
             },
             {
                 "pitch": 5, "yaw": 90,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🛋️</span> پذیرش',
+                "text": "️ پذیرش",
                 "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
             }
         ]
@@ -390,21 +417,21 @@ const scenes = {
                 "pitch": 0, "yaw": 180,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🔙</span> میدان ملت',
+                "text": "🔙 میدان ملت",
                 "clickHandlerFunc": function() { cinematicTransition('meydan-mellat'); }
             },
             {
                 "pitch": -5, "yaw": 0,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">️</span> پذیرش',
+                "text": "🛋️ پذیرش",
                 "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
             },
             {
                 "pitch": 5, "yaw": -90,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🦷</span> اتاق یونیت',
+                "text": "🦷 اتاق یونیت",
                 "clickHandlerFunc": function() { cinematicTransition('younit'); }
             }
         ]
@@ -418,21 +445,21 @@ const scenes = {
                 "pitch": 0, "yaw": 180,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon"></span> میدان ملت',
+                "text": "🔙 میدان ملت",
                 "clickHandlerFunc": function() { cinematicTransition('meydan-mellat'); }
             },
             {
                 "pitch": -5, "yaw": 0,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🦷</span> اتاق یونیت',
+                "text": "🦷 اتاق یونیت",
                 "clickHandlerFunc": function() { cinematicTransition('younit'); }
             },
             {
                 "pitch": 0, "yaw": 90,
                 "type": "info",
                 "cssClass": "neon-hotspot consult",
-                "text": '<span class="icon">📞</span> مشاوره رایگان',
+                "text": " مشاوره رایگان",
                 "clickHandlerFunc": openLandingPage
             }
         ]
@@ -446,14 +473,14 @@ const scenes = {
                 "pitch": 0, "yaw": 180,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🔙</span> پذیرش',
+                "text": "🔙 پذیرش",
                 "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
             },
             {
                 "pitch": 5, "yaw": 90,
                 "type": "info",
                 "cssClass": "neon-hotspot",
-                "text": '<span class="icon">🚪</span> ورودی',
+                "text": "🚪 ورودی",
                 "clickHandlerFunc": function() { cinematicTransition('voroodi'); }
             }
         ]
@@ -480,6 +507,21 @@ viewer.on('scenechange', function(sceneId) {
 viewer.on('load', function() {
     document.getElementById('loading').style.display = 'none';
 });
+
+// افکت تاچ برای موبایل
+document.addEventListener('touchstart', function(e) {
+    if (e.target.classList.contains('neon-hotspot')) {
+        e.target.classList.add('touch-active');
+    }
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+    if (e.target.classList.contains('neon-hotspot')) {
+        setTimeout(() => {
+            e.target.classList.remove('touch-active');
+        }, 200);
+    }
+}, { passive: true });
 </script>
 
 </body>
