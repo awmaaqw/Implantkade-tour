@@ -6,49 +6,118 @@
     <title>تور مجازی 360° کلینیک ایمپلنتکده</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: Tahoma, sans-serif; 
+            font-family: 'Vazirmatn', Tahoma, sans-serif; 
             overflow: hidden; 
             background: #000;
         }
-        #panorama { 
-            width: 100vw; 
-            height: 100vh;
-        }
+        #panorama { width: 100vw; height: 100vh; }
         
-        .custom-hotspot {
-            width: 50px;
-            height: 50px;
-            background: radial-gradient(circle, #4fc3f7 0%, #0277bd 100%);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 20px rgba(79, 195, 247, 0.9);
-            cursor: pointer;
-        }
-        
-        .consult-hotspot {
-            width: 60px;
-            height: 60px;
-            background: radial-gradient(circle, #66bb6a 0%, #2e7d32 100%);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 25px rgba(102, 187, 106, 1);
-            cursor: pointer;
-        }
-        
-        .pnlm-tooltip span {
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-family: Tahoma;
+        /* ===== دکمه‌های نئونی ===== */
+        .neon-hotspot {
+            position: relative;
+            min-width: 110px;
+            padding: 12px 20px;
+            background: rgba(10, 30, 60, 0.75);
+            border: 2px solid #4fc3f7;
+            border-radius: 30px;
+            color: #fff;
+            font-family: 'Vazirmatn', sans-serif;
             font-size: 14px;
-            direction: rtl;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            box-shadow: 
+                0 0 8px rgba(79, 195, 247, 0.6),
+                0 0 20px rgba(79, 195, 247, 0.3),
+                inset 0 0 10px rgba(79, 195, 247, 0.2);
+            text-shadow: 0 0 8px rgba(79, 195, 247, 0.8);
+            animation: neonPulse 2.5s ease-in-out infinite;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
         }
         
-        /* دکمه‌های ثابت با z-index بالا */
+        .neon-hotspot:hover,
+        .neon-hotspot:active {
+            background: rgba(79, 195, 247, 0.3);
+            box-shadow: 
+                0 0 15px rgba(79, 195, 247, 0.9),
+                0 0 35px rgba(79, 195, 247, 0.5),
+                inset 0 0 15px rgba(79, 195, 247, 0.4);
+            transform: scale(1.08);
+        }
+        
+        @keyframes neonPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 6px rgba(79, 195, 247, 0.5),
+                    0 0 15px rgba(79, 195, 247, 0.25),
+                    inset 0 0 8px rgba(79, 195, 247, 0.15);
+                text-shadow: 0 0 6px rgba(79, 195, 247, 0.6);
+            }
+            50% {
+                box-shadow: 
+                    0 0 10px rgba(79, 195, 247, 0.7),
+                    0 0 25px rgba(79, 195, 247, 0.35),
+                    inset 0 0 12px rgba(79, 195, 247, 0.25);
+                text-shadow: 0 0 10px rgba(79, 195, 247, 0.9);
+            }
+        }
+        
+        /* دکمه مشاوره - سبز نئونی */
+        .neon-hotspot.consult {
+            border-color: #66bb6a;
+            background: rgba(10, 50, 30, 0.75);
+            box-shadow: 
+                0 0 8px rgba(102, 187, 106, 0.6),
+                0 0 20px rgba(102, 187, 106, 0.3),
+                inset 0 0 10px rgba(102, 187, 106, 0.2);
+            text-shadow: 0 0 8px rgba(102, 187, 106, 0.8);
+            animation: neonPulseGreen 2s ease-in-out infinite;
+        }
+        
+        .neon-hotspot.consult:hover,
+        .neon-hotspot.consult:active {
+            background: rgba(102, 187, 106, 0.3);
+            box-shadow: 
+                0 0 15px rgba(102, 187, 106, 0.9),
+                0 0 35px rgba(102, 187, 106, 0.5),
+                inset 0 0 15px rgba(102, 187, 106, 0.4);
+        }
+        
+        @keyframes neonPulseGreen {
+            0%, 100% {
+                box-shadow: 
+                    0 0 6px rgba(102, 187, 106, 0.5),
+                    0 0 15px rgba(102, 187, 106, 0.25),
+                    inset 0 0 8px rgba(102, 187, 106, 0.15);
+            }
+            50% {
+                box-shadow: 
+                    0 0 12px rgba(102, 187, 106, 0.8),
+                    0 0 30px rgba(102, 187, 106, 0.4),
+                    inset 0 0 14px rgba(102, 187, 106, 0.3);
+            }
+        }
+        
+        /* آیکون داخل دکمه */
+        .neon-hotspot .icon {
+            font-size: 16px;
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+        
+        /* مخفی کردن تولتیپ پیش‌فرض Pannellum */
+        .pnlm-tooltip { display: none !important; }
+        
+        /* ===== دکمه‌های ثابت ===== */
         .fixed-btn {
             position: fixed;
             z-index: 9999;
@@ -57,67 +126,67 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Vazirmatn', sans-serif;
+            border: none;
         }
         
         .scene-title {
-            top: 15px;
-            right: 15px;
+            top: 15px; right: 15px;
             background: linear-gradient(135deg, rgba(2, 119, 189, 0.95), rgba(0, 77, 128, 0.95));
             color: white;
             padding: 12px 22px;
             border-radius: 25px;
             font-size: 15px;
-            border: none;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(2, 119, 189, 0.5);
         }
         
         .gps-btn {
-            top: 15px;
-            left: 15px;
+            top: 15px; left: 15px;
             background: rgba(255,255,255,0.95);
-            border: none;
             padding: 12px 18px;
             border-radius: 25px;
-            font-family: Tahoma;
             font-size: 13px;
+            font-weight: 700;
             color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .back-btn {
-            top: 70px;
-            left: 15px;
+            top: 70px; left: 15px;
             background: rgba(255,255,255,0.95);
-            border: none;
             padding: 10px 18px;
             border-radius: 25px;
-            font-family: Tahoma;
             font-size: 13px;
+            font-weight: 700;
             color: #333;
             display: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         
         .logo {
-            bottom: 20px;
-            right: 20px;
+            bottom: 20px; right: 20px;
             background: linear-gradient(135deg, #0277bd, #01579b);
             color: white;
             padding: 12px 22px;
             border-radius: 25px;
             font-size: 15px;
-            font-weight: bold;
+            font-weight: 900;
+            box-shadow: 0 4px 20px rgba(2, 119, 189, 0.6);
         }
         
         .sound-control {
-            bottom: 20px;
-            left: 20px;
+            bottom: 20px; left: 20px;
             background: rgba(0,0,0,0.75);
             color: white;
             padding: 12px 20px;
             border-radius: 25px;
-            font-family: Tahoma;
             font-size: 13px;
-            border: none;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
         }
         
+        /* لودینگ */
         .loading {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -128,6 +197,7 @@
             justify-content: center;
             z-index: 10000;
             color: white;
+            font-family: 'Vazirmatn', sans-serif;
         }
         .loading-spinner {
             width: 60px; height: 60px;
@@ -135,8 +205,24 @@
             border-top-color: white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
+        
+        /* ترنزیشن */
+        .transition-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #000;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9998;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .transition-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
     </style>
 </head>
 <body>
@@ -146,10 +232,12 @@
     <div>در حال بارگذاری...</div>
 </div>
 
-<a href="https://dibaads.com/" target="_blank" class="fixed-btn scene-title" id="sceneTitle">🦷 ایمپلنتکده</a>
+<div class="transition-overlay" id="transitionOverlay"></div>
+
+<a href="https://dibaads.com/" target="_blank" class="fixed-btn scene-title">🦷 ایمپلنتکده</a>
 
 <button class="fixed-btn gps-btn" id="gpsBtn">
-    <span>📍</span>
+    <span></span>
     <span>میدان ملت</span>
 </button>
 
@@ -168,28 +256,33 @@
 <script>
 let soundEnabled = true;
 let audioStarted = false;
+let isTransitioning = false;
+
+// ===== مختصات GPS =====
+const GPS_LAT = 35.5689;
+const GPS_LNG = 51.3456;
 
 function playWhoosh() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const duration = 0.5;
+        const duration = 0.8;
         const buffer = ctx.createBuffer(2, ctx.sampleRate * duration, ctx.sampleRate);
         for (let ch = 0; ch < 2; ch++) {
             const data = buffer.getChannelData(ch);
             for (let i = 0; i < buffer.length; i++) {
                 const t = i / buffer.length;
-                data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 3) * 0.8;
+                data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2) * 0.7;
             }
         }
         const source = ctx.createBufferSource();
         source.buffer = buffer;
         const filter = ctx.createBiquadFilter();
         filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(3000, ctx.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + duration);
+        filter.frequency.setValueAtTime(4000, ctx.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + duration);
         const gain = ctx.createGain();
         gain.gain.setValueAtTime(0, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.5, ctx.currentTime + 0.05);
+        gain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.1);
         gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
         source.connect(filter).connect(gain).connect(ctx.destination);
         source.start();
@@ -199,7 +292,6 @@ function playWhoosh() {
 const pianoMusic = document.getElementById('pianoMusic');
 pianoMusic.volume = 0.15;
 
-// دکمه صدا
 document.getElementById('soundBtn').addEventListener('click', function(e) {
     e.stopPropagation();
     soundEnabled = !soundEnabled;
@@ -214,22 +306,18 @@ document.getElementById('soundBtn').addEventListener('click', function(e) {
     }
 });
 
-// دکمه GPS
 document.getElementById('gpsBtn').addEventListener('click', function(e) {
     e.stopPropagation();
     playWhoosh();
-    const lat = 35.5689;
-    const lng = 51.3456;
-    window.open(`https://www.google.com/maps?q=${lat},${lng}&z=17`, '_blank');
+    const url = `https://www.google.com/maps/search/?api=1&query=${GPS_LAT},${GPS_LNG}`;
+    window.open(url, '_blank');
 });
 
-// دکمه بازگشت
 document.getElementById('backBtn').addEventListener('click', function(e) {
     e.stopPropagation();
-    viewer.loadScene('meydan-mellat');
+    cinematicTransition('meydan-mellat');
 });
 
-// شروع صدا با اولین کلیک روی panorama
 document.getElementById('panorama').addEventListener('click', function() {
     if (soundEnabled && !audioStarted) {
         pianoMusic.play().catch(()=>{});
@@ -242,124 +330,147 @@ function openLandingPage() {
     window.open('https://dibaads.com/cooperation/#contact', '_blank');
 }
 
+function cinematicTransition(targetSceneId) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    playWhoosh();
+    
+    const overlay = document.getElementById('transitionOverlay');
+    
+    viewer.setZoom(120);
+    
+    setTimeout(() => {
+        overlay.classList.add('active');
+    }, 300);
+    
+    setTimeout(() => {
+        viewer.loadScene(targetSceneId);
+    }, 800);
+    
+    setTimeout(() => {
+        overlay.classList.remove('active');
+    }, 1200);
+    
+    setTimeout(() => {
+        viewer.setZoom(50);
+        isTransitioning = false;
+    }, 1500);
+}
+
+// ===== تعریف صحنه‌ها =====
+const scenes = {
+    "meydan-mellat": {
+        "title": "میدان ملت",
+        "type": "equirectangular",
+        "panorama": "meydan-mellat.jpg",
+        "hotSpots": [
+            {
+                "pitch": -5, "yaw": 0,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🚪</span> ایمپلنتکده',
+                "clickHandlerFunc": function() { cinematicTransition('voroodi'); }
+            },
+            {
+                "pitch": 5, "yaw": 90,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🛋️</span> پذیرش',
+                "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
+            }
+        ]
+    },
+    "voroodi": {
+        "title": "ورودی ایمپلنتکده",
+        "type": "equirectangular",
+        "panorama": "voroodi.jpg",
+        "hotSpots": [
+            {
+                "pitch": 0, "yaw": 180,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🔙</span> میدان ملت',
+                "clickHandlerFunc": function() { cinematicTransition('meydan-mellat'); }
+            },
+            {
+                "pitch": -5, "yaw": 0,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">️</span> پذیرش',
+                "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
+            },
+            {
+                "pitch": 5, "yaw": -90,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🦷</span> اتاق یونیت',
+                "clickHandlerFunc": function() { cinematicTransition('younit'); }
+            }
+        ]
+    },
+    "paziresh": {
+        "title": "پذیرش",
+        "type": "equirectangular",
+        "panorama": "paziresh.jpg",
+        "hotSpots": [
+            {
+                "pitch": 0, "yaw": 180,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon"></span> میدان ملت',
+                "clickHandlerFunc": function() { cinematicTransition('meydan-mellat'); }
+            },
+            {
+                "pitch": -5, "yaw": 0,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🦷</span> اتاق یونیت',
+                "clickHandlerFunc": function() { cinematicTransition('younit'); }
+            },
+            {
+                "pitch": 0, "yaw": 90,
+                "type": "info",
+                "cssClass": "neon-hotspot consult",
+                "text": '<span class="icon">📞</span> مشاوره رایگان',
+                "clickHandlerFunc": openLandingPage
+            }
+        ]
+    },
+    "younit": {
+        "title": "اتاق یونیت",
+        "type": "equirectangular",
+        "panorama": "younit.jpg",
+        "hotSpots": [
+            {
+                "pitch": 0, "yaw": 180,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🔙</span> پذیرش',
+                "clickHandlerFunc": function() { cinematicTransition('paziresh'); }
+            },
+            {
+                "pitch": 5, "yaw": 90,
+                "type": "info",
+                "cssClass": "neon-hotspot",
+                "text": '<span class="icon">🚪</span> ورودی',
+                "clickHandlerFunc": function() { cinematicTransition('voroodi'); }
+            }
+        ]
+    }
+};
+
 const viewer = pannellum.viewer('panorama', {
     "default": {
         "firstScene": "meydan-mellat",
-        "sceneFadeDuration": 800,
+        "sceneFadeDuration": 1000,
         "autoLoad": true,
         "showControls": true,
-        "hfov": 100
+        "hfov": 100,
+        "minHfov": 50,
+        "maxHfov": 120
     },
-    "scenes": {
-        "meydan-mellat": {
-            "title": "میدان ملت",
-            "type": "equirectangular",
-            "panorama": "meydan-mellat.jpg",
-            "hotSpots": [
-                {
-                    "pitch": -5,
-                    "yaw": 0,
-                    "type": "scene",
-                    "text": "🚪 ورود به ایمپلنتکده",
-                    "sceneId": "voroodi",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": 5,
-                    "yaw": 90,
-                    "type": "scene",
-                    "text": "🛋️ پذیرش",
-                    "sceneId": "paziresh",
-                    "cssClass": "custom-hotspot"
-                }
-            ]
-        },
-        "voroodi": {
-            "title": "ورودی ایمپلنتکده",
-            "type": "equirectangular",
-            "panorama": "voroodi.jpg",
-            "hotSpots": [
-                {
-                    "pitch": 0,
-                    "yaw": 180,
-                    "type": "scene",
-                    "text": "🔙 بازگشت به میدان",
-                    "sceneId": "meydan-mellat",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": -5,
-                    "yaw": 0,
-                    "type": "scene",
-                    "text": "🛋️ پذیرش",
-                    "sceneId": "paziresh",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": 5,
-                    "yaw": -90,
-                    "type": "scene",
-                    "text": "🦷 اتاق یونیت",
-                    "sceneId": "younit",
-                    "cssClass": "custom-hotspot"
-                }
-            ]
-        },
-        "paziresh": {
-            "title": "پذیرش",
-            "type": "equirectangular",
-            "panorama": "paziresh.jpg",
-            "hotSpots": [
-                {
-                    "pitch": 0,
-                    "yaw": 180,
-                    "type": "scene",
-                    "text": "🔙 میدان ملت",
-                    "sceneId": "meydan-mellat",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": -5,
-                    "yaw": 0,
-                    "type": "scene",
-                    "text": "🦷 اتاق یونیت",
-                    "sceneId": "younit",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": 0,
-                    "yaw": 90,
-                    "type": "info",
-                    "text": "مشاوره رایگان",
-                    "cssClass": "consult-hotspot",
-                    "clickHandlerFunc": openLandingPage
-                }
-            ]
-        },
-        "younit": {
-            "title": "اتاق یونیت",
-            "type": "equirectangular",
-            "panorama": "younit.jpg",
-            "hotSpots": [
-                {
-                    "pitch": 0,
-                    "yaw": 180,
-                    "type": "scene",
-                    "text": " پذیرش",
-                    "sceneId": "paziresh",
-                    "cssClass": "custom-hotspot"
-                },
-                {
-                    "pitch": 5,
-                    "yaw": 90,
-                    "type": "scene",
-                    "text": "🚪 ورودی",
-                    "sceneId": "voroodi",
-                    "cssClass": "custom-hotspot"
-                }
-            ]
-        }
-    }
+    "scenes": scenes
 });
 
 viewer.on('scenechange', function(sceneId) {
